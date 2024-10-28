@@ -2,7 +2,7 @@ import json
 from typing import TypedDict
 
 
-class ConfigWeek(TypedDict):
+class ConfigWeekDays(TypedDict):
     Monday: bool
     Tuesday: bool
     Wednesday: bool
@@ -12,7 +12,7 @@ class ConfigWeek(TypedDict):
     Sunday: bool
 
 class Config(TypedDict):
-    week: ConfigWeek
+    weekDays: ConfigWeekDays
 
 
 with open("config.json", "r") as file:

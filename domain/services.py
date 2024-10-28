@@ -22,6 +22,6 @@ def get_expected_time(recap: Recap):
     return sum([
         recap.get_expected()
         for date in date_range
-        if config['week'][date.strftime('%A')]
+        if config['weekDays'][date.strftime('%A')]
         and date < datetime.today().date() 
     ])
