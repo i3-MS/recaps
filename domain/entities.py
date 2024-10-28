@@ -5,25 +5,25 @@ from datetime import timedelta
 
 @dataclass
 class DailyRecap:
-    offline: list[str] | None = None
+    office: list[str] | None = None
     remote: list[str] | None = None
     tags: list[str] | None = None
 
     def get_time_worked(self, daily_name: str) -> timedelta:
         FMT = '%H:%M'
 
-        time_worked_offline = timedelta(seconds=0)
+        time_worked_office = timedelta(seconds=0)
         time_worked_remote = timedelta(seconds=0)
 
-        if self.offline:
-            if len(self.offline) % 2 == 0:
-                for i in range(0, len(self.offline), 2):
+        if self.office:
+            if len(self.office) % 2 == 0:
+                for i in range(0, len(self.office), 2):
                     time_worked_remote += (
-                        datetime.strptime(self.offline[i+1], FMT) - 
-                        datetime.strptime(self.offline[i], FMT)
+                        datetime.strptime(self.office[i+1], FMT) - 
+                        datetime.strptime(self.office[i], FMT)
                     )
             else:
-                print(f'WARNING: {daily_name} {self.offline}')
+                print(f'WARNING: {daily_name} {self.office}')
         
         if self.remote:
             if len(self.remote) % 2 == 0:
@@ -35,7 +35,7 @@ class DailyRecap:
             else:
                 print(f'WARNING: {daily_name} {self.remote}')
         
-        return time_worked_offline + time_worked_remote
+        return time_worked_office + time_worked_remote
 
 
 @dataclass
@@ -46,7 +46,7 @@ class RecapDate:
 
 @dataclass
 class RecapExpected:
-    offline_hours: int
+    office_hours: int
     remote_hours: int
 
 
@@ -58,6 +58,6 @@ class Recap:
     
     def get_expected(self) -> int:
         return (
-            self.expected.offline_hours + 
+            self.expected.office_hours + 
             self.expected.remote_hours
         )
