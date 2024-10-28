@@ -9,8 +9,8 @@ from .entities import Recap
 
 def get_time_worked_in_minutes(recap: Recap):
     return sum([
-        mapper.tdelta_to_minutes(daily.get_time_worked())
-        for daily in recap.dailies.values()
+        mapper.tdelta_to_minutes(daily.get_time_worked(daily_name))
+        for daily_name, daily in recap.dailies.items()
     ])
 
 

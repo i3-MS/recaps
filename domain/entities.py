@@ -9,23 +9,31 @@ class DailyRecap:
     remote: list[str] | None = None
     tags: list[str] | None = None
 
-    def get_time_worked(self) -> timedelta:
+    def get_time_worked(self, daily_name: str) -> timedelta:
         FMT = '%H:%M'
 
         time_worked_offline = timedelta(seconds=0)
         time_worked_remote = timedelta(seconds=0)
 
-        if self.offline and len(self.offline) == 2:
-            time_worked_offline = (
-                datetime.strptime(self.offline[1], FMT) - 
-                datetime.strptime(self.offline[0], FMT)
-            )
-
-        if self.remote and len(self.remote) == 2:
-            time_worked_remote = (
-                datetime.strptime(self.remote[1], FMT) - 
-                datetime.strptime(self.remote[0], FMT)
-            )
+        if self.offline:
+            if len(self.offline) % 2 == 0:
+                for i in range(0, len(self.offline), 2):
+                    time_worked_remote += (
+                        datetime.strptime(self.offline[i+1], FMT) - 
+                        datetime.strptime(self.offline[i], FMT)
+                    )
+            else:
+                print(f'WARNING: {daily_name} {self.offline}')
+        
+        if self.remote:
+            if len(self.remote) % 2 == 0:
+                for i in range(0, len(self.remote), 2):
+                    time_worked_remote += (
+                        datetime.strptime(self.remote[i+1], FMT) - 
+                        datetime.strptime(self.remote[i], FMT)
+                    )
+            else:
+                print(f'WARNING: {daily_name} {self.remote}')
         
         return time_worked_offline + time_worked_remote
 
