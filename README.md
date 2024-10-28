@@ -20,7 +20,7 @@ cd recaps
 
 ### Make recaps directory
 ```bash
-cp recaps.example recaps
+cp -r recaps.example recaps
 ```
 
 ### Activate environment
