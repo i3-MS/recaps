@@ -1,0 +1,7 @@
+recaps/
+
+__pycache__
+*.pyc
+
+venv/
+.env
