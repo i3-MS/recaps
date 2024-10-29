@@ -34,7 +34,7 @@ def get_total_expected_time(recap: Recap, type: str | None = None):
 
     for date in date_range:
         if (config['weekDays'][date.strftime('%A')]
-            and date < datetime.today().date()
+            and date <= datetime.today().date()
             ):
             result += value_by_type.get(type, 0)
 
