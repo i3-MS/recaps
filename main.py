@@ -9,8 +9,7 @@ def main():
     parser.add_argument("recap_path", type=str, help="file/folder path for report")
     args = parser.parse_args()
 
-    recap_path = os.path.join('recaps', args.recap_path)
-    print_recap_details(recap_path)
+    print_recap_details(args.recap_path)
 
 
 if __name__ == '__main__':

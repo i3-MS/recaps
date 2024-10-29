@@ -9,7 +9,7 @@ class DailyRecap:
     remote: list[str] | None = None
     tags: list[str] | None = None
 
-    def get_time_worked(self, daily_name: str) -> timedelta:
+    def get_time_worked(self, daily_name: str) -> tuple[timedelta, timedelta]:
         FMT = '%H:%M'
 
         time_worked_office = timedelta(seconds=0)
@@ -18,7 +18,7 @@ class DailyRecap:
         if self.office:
             if len(self.office) % 2 == 0:
                 for i in range(0, len(self.office), 2):
-                    time_worked_remote += (
+                    time_worked_office += (
                         datetime.strptime(self.office[i+1], FMT) - 
                         datetime.strptime(self.office[i], FMT)
                     )
@@ -35,7 +35,7 @@ class DailyRecap:
             else:
                 print(f'WARNING: {daily_name} {self.remote}')
         
-        return time_worked_office + time_worked_remote
+        return time_worked_office, time_worked_remote
 
 
 @dataclass
@@ -56,7 +56,7 @@ class Recap:
     expected: RecapExpected 
     dailies: dict[str, DailyRecap]
     
-    def get_expected(self) -> int:
+    def get_expected_total(self) -> int:
         return (
             self.expected.office_hours + 
             self.expected.remote_hours

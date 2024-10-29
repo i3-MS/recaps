@@ -37,7 +37,7 @@ pip install -r requirements.txt
 
 ## Usage
 ```bash
-python main.py example.yaml
+python main.py recaps/example.yaml
 ```
 
 
