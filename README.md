@@ -1,6 +1,6 @@
 # Recaps
 
-Service for calculating worked hours for a given period.
+a software service for calculating working hours for a certain period.
 
 
 ## Table of Contents
